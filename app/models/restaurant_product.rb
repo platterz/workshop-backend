@@ -23,5 +23,5 @@
 class RestaurantProduct < ApplicationRecord
   belongs_to :restaurant, inverse_of: :restaurant_products
 
-  validate :item, :price, presence: true
+  validates :item, :price, presence: true
 end

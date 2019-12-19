@@ -17,6 +17,6 @@
 class Restaurant < ApplicationRecord
   has_many :restaurant_products, inverse_of: :restaurant, dependent: :destroy
 
-  validate :name, presence: true
-  validate :price_range, inclusion: { in: 1..3 }
+  validates :name, presence: true
+  validates :price_range, inclusion: { in: 1..3 }
 end
