@@ -20,7 +20,6 @@
 #  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
-
 require 'faker'
 
 FactoryBot.define do

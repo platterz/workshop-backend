@@ -14,7 +14,6 @@
 #  updated_at        :datetime         not null
 #
 
-
 require 'faker'
 
 FactoryBot.define do
