@@ -9,7 +9,7 @@
 #  image             :string
 #  image_description :string
 #  name              :string           not null
-#  price_range       :integer
+#  price_range       :integer          default(1), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

@@ -47,7 +47,7 @@ CREATE TABLE public.restaurant_products (
     id bigint NOT NULL,
     item character varying NOT NULL,
     price double precision NOT NULL,
-    restaurants_id bigint NOT NULL,
+    restaurant_id bigint NOT NULL,
     created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
 );
@@ -79,7 +79,7 @@ ALTER SEQUENCE public.restaurant_products_id_seq OWNED BY public.restaurant_prod
 CREATE TABLE public.restaurants (
     id bigint NOT NULL,
     name character varying NOT NULL,
-    price_range integer,
+    price_range integer DEFAULT 1 NOT NULL,
     description character varying,
     image character varying,
     image_description character varying,
@@ -163,18 +163,18 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
--- Name: index_restaurant_products_on_restaurants_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_restaurant_products_on_restaurant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_restaurant_products_on_restaurants_id ON public.restaurant_products USING btree (restaurants_id);
+CREATE INDEX index_restaurant_products_on_restaurant_id ON public.restaurant_products USING btree (restaurant_id);
 
 
 --
--- Name: restaurant_products fk_rails_5821c741f7; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: restaurant_products fk_rails_b2052a65aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.restaurant_products
-    ADD CONSTRAINT fk_rails_5821c741f7 FOREIGN KEY (restaurants_id) REFERENCES public.restaurants(id);
+    ADD CONSTRAINT fk_rails_b2052a65aa FOREIGN KEY (restaurant_id) REFERENCES public.restaurants(id);
 
 
 --
