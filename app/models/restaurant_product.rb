@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: restaurant_products
@@ -19,4 +21,7 @@
 #
 
 class RestaurantProduct < ApplicationRecord
+  belongs_to :restaurant, inverse_of: :restaurant_products
+
+  validate :item, :price, presence: true
 end

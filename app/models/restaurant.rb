@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: restaurants
@@ -13,4 +15,8 @@
 #
 
 class Restaurant < ApplicationRecord
+  has_many :restaurant_products, inverse_of: :restaurant, dependent: :destroy
+
+  validate :name, presence: true
+  validate :price_range, inclusion: { in: 1..3 }
 end
