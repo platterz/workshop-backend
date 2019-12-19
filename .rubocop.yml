@@ -1,0 +1,186 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  DefaultFormatter: progress
+  DisplayCopNames: true
+  ExtraDetails: true
+  TargetRubyVersion: 2.6
+
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*_init_schema.rb'
+    - 'vendor/**/*'
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Layout/AlignHash:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Layout/SpaceInLambdaLiteral:
+  EnforcedStyle: require_space
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Lint/ScriptPermission:
+  Enabled: true
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/BlockLength:
+  Exclude:
+    - 'app/*/concerns/*.rb'
+    - 'app/indices/**/*.rb'
+    - 'config/routes.rb'
+    - 'config/initializers/*.rb'
+    - 'db/**/*.rb'
+    - 'spec/**/*.rb'
+    - 'lib/tasks/**/*.rake'
+    - 'config/environments/*.rb'
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 200
+
+Metrics/LineLength:
+  Max: 120
+  IgnoredPatterns:
+    - '^# [^\n]+'
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+  Exclude:
+    - 'app/indices/*.rb'
+    - 'db/migrate/**/*.rb'
+
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 200
+  Exclude:
+    - 'app/indices/*.rb'
+    - 'app/lib/constants/*.rb'
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
+
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - app/queries/*.rb
+    - app/services/query/*.rb
+  AllowedNames:
+    - as
+    - id
+    - in
+    - to
+
+Performance/Caller:
+  Enabled: true
+
+Rails:
+  Enabled: true
+
+# Disable because broken in 0.67.2
+Rails/ActiveRecordOverride:
+  Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: true
+  Exclude:
+    - db/migrate/2016*.rb
+    - db/migrate/2017*.rb
+    - db/migrate/2018*.rb
+
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_slug_path
+    - find_by_slug_path!
+    - find_by_slug_value
+    - find_by_slug_value!
+    - find_by_location
+    - find_by_name_or_code
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false # This triggers a lot of false positives.
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false # This doesn't work with the Restful concern.
+
+Rails/NotNullColumn:
+  Enabled: false
+
+Rails/Output:
+  Exclude:
+    - 'db/migrate/*'
+
+Rails/ReflectionClassName:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Enabled: true
+  Environments:
+    - development
+    - test
+    - staging
+    - production
+    - e2e
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_inside_condition
+  IncludeTernaryExpressions: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/FormatStringToken:
+  Enabled: false # This triggers false positives with `%g`.
+  EnforcedStyle: template
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/MixinUsage:
+  Exclude:
+    - bin/*
+
+Style/MultipleComparison:
+  Enabled: true
+
+Style/NumericLiterals:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Style/ReturnNil:
+  Enabled: true
+
+Style/YodaCondition:
+  Enabled: true
