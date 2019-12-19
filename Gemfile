@@ -40,3 +40,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem "annotate", "~> 3.0", :group => :development
+
+gem "rspec", "~> 3.9", :group => :test
