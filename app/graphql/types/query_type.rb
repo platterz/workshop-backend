@@ -7,5 +7,7 @@ module Types
 
     field :restaurant, resolver: Queries::Restaurant
     field :restaurants, resolver: Queries::RestaurantQuery
+
+    field :restaurant_product, resolver: Queries::RestaurantProductQuery
   end
 end
