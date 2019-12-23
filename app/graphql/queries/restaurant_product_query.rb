@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Queries::RestaurantProductQuery < Queries::BasicObject
+class Queries::RestaurantProductQuery < Queries::BaseQuery
   field :restaurant_product, Types::RestaurantProductType, null: false
   field :errors, [Types::ValidationErrorType], null: false
 

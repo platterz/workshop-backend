@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class Queries::RestaurantQuery < Queries::BaseQuery
-  field :restaurant, Types::RestaurantType, null: false
-  field :errors, [Types::ValidationErrorType], null: false
+  type Types::RestaurantType, null: true
 
   argument :id, ID, required: true
 
   def resolve(id:)
-    { restaurant: Restaurant.find(id), errors: [] }
+    Restaurant.find(id)
   end
 end
