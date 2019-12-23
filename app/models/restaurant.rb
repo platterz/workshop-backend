@@ -19,4 +19,18 @@ class Restaurant < ApplicationRecord
 
   validates :name, presence: true
   validates :price_range, inclusion: { in: 1..3 }
+
+  scope :search, -> (query) {
+    sanitized_query = "%#{sanitize_sql_like(query)}%"
+    where(arel_table[:name].matches(sanitized_query))
+      .or(where(arel_table[:description].matches(sanitized_query)))
+  }
+
+  scope :search_by_product, -> (query) {
+    sanitized_query = "%#{sanitize_sql_like(query)}%"
+    product_query = RestaurantProduct.where(RestaurantProduct.arel_table[:restaurant_id].eq(arel_table[:id]))
+                                     .where(RestaurantProduct.arel_table[:item].matches(sanitized_query))
+
+    where(product_query.arel.exists)
+  }
 end
