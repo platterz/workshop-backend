@@ -8,6 +8,8 @@ The purpose of this workshop is to learn to dockerize and deploy your applicatio
 # What is Docker?
 The purpose of docker is to build a small isolated image that has all the essential infrastructure to run our application and can be deployed to any cloud provider. In a way, Docker can be treated as a very lightweight virtual machine that's meant to run a specific command (such as our rails server). 
 Installing docker varies by operating system (you can google 'Install docker on <OS>'), but be sure that whichever way you choose - that you install the CLI tools.
+  
+A small note on terminology: `image` refers to the 'blueprint' of an environment. `container` refers to an instance of that image. For example, you can create an image for running your rails server then deploy many containers of that image.
 
 # Dockerfile
 In order to build a docker image, we have to specify a file with step-by-step instructions on how to build that image. That file is usually called `Dockerfile` (a basic version is provided in this repo)
