@@ -13,8 +13,6 @@ class ErrorHandlingInstrumentation
         old_resolve_proc.call(object, arguments, context)
       rescue ActiveRecord::RecordNotFound => error
         handle_not_found_error(error)
-      rescue Pundit::NotAuthorizedError => error
-        handle_not_authorized_error(error, context)
       end
     }
 
