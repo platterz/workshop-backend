@@ -6,10 +6,10 @@ class Queries::RestaurantsQuery < Queries::BaseQuery
   argument :restaurant_query, String, required: false, description: 'Search restaurant name and description'
   argument :product_query, String, required: false, description: 'Search restaurants by product names'
 
-  def resolve(query: nil, product_query: nil)
+  def resolve(restaurant_query: nil, product_query: nil)
     scope = Restaurant.all
-    scope = scope.search(query) if query.present?
-    scope = scope.search_by_product if product_query.present?
+    scope = scope.search(restaurant_query) if restaurant_query.present?
+    scope = scope.search_by_product(product_query) if product_query.present?
     scope
   end
 end
