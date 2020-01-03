@@ -3,6 +3,11 @@ This repository contains a simple implemented read-only backend API.
 
 # Objective
 The purpose of this workshop is to learn to dockerize and deploy your application.
+By the end of this tutorial, you should be able to:
+- Read and write Dockerfiles
+- Build docker images
+- Run docker containers from a given image
+- Deploy
 
 # What is Docker?
 The purpose of docker is to build a small isolated image that has all the essential infrastructure to run our application and can be deployed to any cloud provider. In a way, Docker can be treated as a very lightweight virtual machine that's meant to run a specific command (such as our rails server). 
