@@ -1,6 +1,5 @@
 # Introduction
-This repository contains a simple (but implemented) backend for the corresponding front end portion of the workshop.
-Front enders can use this app in the same way they use our regular API.
+This repository contains a simple implemented read-only backend API.
 
 # Objective
 The purpose of this workshop is to learn to dockerize and deploy your application.
