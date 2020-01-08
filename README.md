@@ -51,3 +51,51 @@ You can use the following instead (replace `server` if you used a different name
 
 # Deploying (TBD)
 
+First, we need to install several dependencies:
+```
+brew install kubectl
+
+brew install aws-iam-authenticator
+
+brew install awscli
+```
+
+
+Next, since we are using a private repository for deploys, you must login:
+docker login docker.ci.platterz.co -u localIt will ask for a password, the password is found in the shared-devs folder in LastPass, under secure notes
+You should see
+> Login Succeeded
+
+
+In order to configure aws\kubernetes, run the following:
+```
+cd dockerize
+./setup.sh
+```
+Feel free to view the file contents for details.
+
+
+Next, we need to push our docker image to the private repository from which we will deploy.
+```
+# Tag our local image with repository:tag (we all push to the same repository, 
+# but each one of us has our own version of the image specified with the tag)
+docker tag server:latest docker.ci.platterz.co/repository/docker/workshop:$(whoami)
+docker push docker.ci.platterz.co/repository/docker/workshop:$(whoami)
+```
+
+Now we can actually run our container in kubernetes:
+```
+kubectl run --generator=run-pod/v1 --image=docker.ci.platterz.co/repository/docker/workshop:$(whoami) --overrides='{ "apiVersion": "v1", "spec": {"imagePullSecrets": [{"name": "regcred"}]} }' $(whoami)-app --port=80 --env="DATABASE_HOST=playground-workshop-ms-master.ccblyberiqdl.us-east-1.rds.amazonaws.com" --env="DATABASE_USER=pgadmin_playground" --env="DATABASE_PASSWORD=JDJhJDEwJFVZTXdKamtOZTh2TWljaVNSeUpmUE8wTUk3ay5nWkRESllhVTNheUEzYlE3UnB5SEdtTUpt" --env="DATABASE_SCHEMA=$(whoami)-workshop"
+```
+
+In order to access the container, you can forward a local port to the cluster:
+`kubectl port-forward pod/$(whoami)-app 80:80` (you may have to use sudo)
+
+At this point, you can use graphql playground for debugging on `http://localhost:80/graphql`
+
+
+For debug purposes, in order to see the logs use the following command:
+
+kubectl logs -f pods/$(whoami) -c app-$(whoami) for application logs
+
+kubectl logs -f pods/$(whoami) -c db-$(whoami) for db logs
