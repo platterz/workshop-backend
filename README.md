@@ -49,7 +49,9 @@ Note: we use `-p PORT:PORT` to make the container listen on the specified port. 
 Please note that once you run your container in a terminal window, you may not be able to terminate it with `Ctrl+C`.
 You can use the following instead (replace `server` if you used a different name): `docker container kill $(docker ps | grep server | awk '{print $1}')`
 
-# Deploying (TBD)
+# Deploying (Beta)
+
+_Note: This setup is a bit more complex than last section, so if you hit roadblocks - don't hesitate to reach out for help!_
 
 First, we need to install several dependencies:
 ```
