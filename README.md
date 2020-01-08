@@ -83,11 +83,12 @@ docker tag server:latest docker.ci.platterz.co/repository/docker/workshop:$(whoa
 docker push docker.ci.platterz.co/repository/docker/workshop:$(whoami)
 ```
 
-Now we can actually run our container in kubernetes:
+Now we can actually run our container in kubernetes (run while in `dockerize` folder):
 ```
-kubectl run --generator=run-pod/v1 --image=docker.ci.platterz.co/repository/docker/workshop:$(whoami) --overrides='{ "apiVersion": "v1", "spec": {"imagePullSecrets": [{"name": "regcred"}]} }' $(whoami)-app --port=80 --env="DATABASE_HOST=playground-workshop-ms-master.ccblyberiqdl.us-east-1.rds.amazonaws.com" --env="DATABASE_USER=pgadmin_playground" --env="DATABASE_PASSWORD=JDJhJDEwJFVZTXdKamtOZTh2TWljaVNSeUpmUE8wTUk3ay5nWkRESllhVTNheUEzYlE3UnB5SEdtTUpt" --env="DATABASE_SCHEMA=$(whoami)-workshop"
+cat pod-setup.yaml | sed "s/{{MY_APP}}/$(whoami)/g" | kubectl apply -f -
 ```
-
+You can examine the contents of `pod-setup.yaml` but the idea is to create two containers in a single pod: one with the database and one with our app, conntected together so that the application can access the database as if it was local
+The command simply replaces 
 In order to access the container, you can forward a local port to the cluster:
 `kubectl port-forward pod/$(whoami)-app 80:80` (you may have to use sudo)
 
@@ -99,3 +100,7 @@ For debug purposes, in order to see the logs use the following command:
 kubectl logs -f pods/$(whoami) -c app-$(whoami) for application logs
 
 kubectl logs -f pods/$(whoami) -c db-$(whoami) for db logs
+
+
+If you want to make changes to your app and\or config and restart, you must first delete the existing pods:
+`kubectl delete pods $(whoami)`
