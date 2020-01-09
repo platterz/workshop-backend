@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  host:     <%= ENV['DATABASE_HOST'] %>
   database: workshop_production
   username: workshop
   password: <%= ENV['WORKSHOP_DATABASE_PASSWORD'] %>
