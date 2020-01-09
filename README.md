@@ -33,7 +33,8 @@ When building an image, think to yourself the following:
 What do you need to add to your image in order to run your server?
 You probably need to copy the code over.
 You should probably install all of the ruby dependencies.
-Finally, you need to specify the entrypoint command (i.e. what to actually run when starting the container)
+Finally, you need to specify the entrypoint command. I have prepared a `start.sh` script that contains the `rails s` as well as some supplementary release commands
+_Note:_ In a real world scenario, deploy operations would be executed elsewhere and the container would only be responsible for running the server.
 
 When you think you're ready, run `docker build . -t server`.
 There's a good chance you will run into errors as you go, but that is expected. See what the error says an correct it accordingly or ask any of the organizers a question.
