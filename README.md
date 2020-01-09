@@ -103,6 +103,9 @@ kubectl logs -f pods/$(whoami) -c app-$(whoami) for application logs
 
 kubectl logs -f pods/$(whoami) -c db-$(whoami) for db logs
 
+You can also run shell in the context of your container using the following command:
+`kubectl exec pods/ytaben -c app-ytaben /bin/sh -it`
+Once inside, you can run `bundle exec rails c` as usual.
 
 If you want to make changes to your app and\or config and restart, you must first delete the existing pods:
 `kubectl delete pods $(whoami)`
