@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{MY_APP}}
+spec:
+  containers:
+    - name: app-{{MY_APP}}
+      image: docker.ci.platterz.co/repository/docker/workshop:{{MY_APP}}
+      ports:
+        - containerPort: 8080
+        - containerPort: 80
+      env:
+        - name: DATABASE_HOST
+          value: localhost
+      imagePullPolicy: Always
+    - name: db-{{MY_APP}}
+      image: postgres:11.6-alpine
+      ports:
+        - containerPort: 5432
+      env:
+        - name: POSTGRES_USER
+          value: workshop
+        - name: POSTGRES_DB
+          value: workshop_production
+  restartPolicy: Never
+  imagePullSecrets:
+    - name: regcred
